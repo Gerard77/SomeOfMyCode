@@ -1,0 +1,554 @@
+﻿<Page x:Class="RemoteDriving.UI.View.CompactLayout"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:loglib="clr-namespace:PageableDataGrid.Library"
+      xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+      xmlns:local="clr-namespace:Prueba"
+      mc:Ignorable="d"
+      
+      Title="MainLayout"  Name="CmpctLayout">
+    <Page.Resources>
+        <Image x:Key="SearchImg" Source="/Images/search_icon.png"></Image>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1200"/>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="330"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" HorizontalAlignment="Center" Width="1200" Height="840" VerticalAlignment="Bottom" Margin="0,0,5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="540"/>
+                <RowDefinition Height="300"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" Width="1200" Height="550">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="0.25*"/>
+                    </Grid.RowDefinitions>
+                    <Image Name="img2" Margin="30,0,30,0" Grid.Row="0" Source="{Binding Foto2}" />
+                    <Label Grid.Row="0" VerticalAlignment="Bottom" Content="Latency:" FontFamily="Trebuchet MS" Foreground="#0066cc" FontSize="10" Width="80" HorizontalAlignment="Left" Background="White"></Label>
+                    <Label Grid.Row="0" VerticalAlignment="Bottom" Content="{Binding LatencyCam2}" FontFamily="Trebuchet MS" Foreground="#0066cc" FontSize="10" Margin="50,0,0,0"></Label>
+                    <Image Name="img3" Margin="30,0,30,0" Grid.Row="2" Source="{Binding Foto3}" />
+                    <Label Grid.Row="2" VerticalAlignment="Bottom" Content="Latency:" FontFamily="Trebuchet MS" Foreground="#0066cc" FontSize="10" Width="80" Background="White" HorizontalAlignment="Left"></Label>
+                    <Label Grid.Row="2" VerticalAlignment="Bottom" Content="{Binding LatencyCam3}" FontFamily="Trebuchet MS" Foreground="#0066cc" FontSize="10" Margin="50,0,0,0"></Label>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition Width="1.1*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Trebuchet MS" Margin="0,0,50,0" 
+                    FontWeight="Bold" FontSize="9" Foreground="#0066cc" Content="FPS&#10;Received:" Grid.Row="2"/>
+                        <TextBox x:Name="txtFps2_received" Grid.Column="0" Text="{Binding FPS2, Mode=OneWay}" Width="50" HorizontalAlignment="Center" Margin="40,5,0,5"/>
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Trebuchet MS" 
+                            FontWeight="Bold" FontSize="10" Foreground="#0066cc" Margin="0,0,0,0" Content="FPS&#10;Real:" Grid.Column="1"/>
+                        <TextBox x:Name="txtFps2_real" Grid.Column="1" Text="{Binding FPS2_Real, Mode=OneWay}" Width="50" HorizontalAlignment="Center" Margin="30,5,0,5"/>
+                        <Button Grid.Column="2" Width="110"
+                    Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ButtonCaptureCam2}" Content="Capture Left Cam"></Button>
+                        <Button Grid.Column="3" Width="98"
+                    Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ButtonStopCam2}" Content="Stop Left Cam"></Button>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition Width="1.1*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Trebuchet MS" Margin="0,0,50,0" 
+                    FontWeight="Bold" FontSize="9" Foreground="#0066cc" Content="FPS&#10;Received:" Grid.Row="2"/>
+                        <TextBox x:Name="txtFps3_received" Grid.Column="0" Text="{Binding FPS3, Mode=OneWay}" Width="50" HorizontalAlignment="Center" Margin="40,5,0,5"/>
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Trebuchet MS" 
+                            FontWeight="Bold" FontSize="10" Foreground="#0066cc" Margin="0,0,0,0" Content="FPS&#10;Real:" Grid.Column="1"/>
+                        <TextBox x:Name="txtFps3_real" Grid.Column="1" Text="{Binding FPS3_Real, Mode=OneWay}" Width="50" HorizontalAlignment="Center" Margin="30,5,0,5"/>
+                        <Button Grid.Column="2" Width="110"
+                    Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ButtonCaptureCam3}" Content="Capture Right Cam"></Button>
+                        <Button Grid.Column="3" Width="98"
+                    Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ButtonStopCam3}" Content="Stop Right Cam"></Button>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1"  Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="167*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.6*"/>
+                        <RowDefinition Height="250"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Margin="126,32,0,3" HorizontalAlignment="Left" FontFamily="Trebuchet MS" 
+            FontWeight="Bold" FontSize="18" Foreground="#0066cc">
+                        Received Image:
+                    </Label>
+                    <Image Name="img" Margin="0,0,30,131" Grid.Row="1" Source="{Binding Foto}" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+                    <Label Grid.Row="1" VerticalAlignment="Bottom" Content="Latency:" FontFamily="Trebuchet MS" Foreground="#0066cc" FontSize="10" Width="80" HorizontalAlignment="Left" Background="White"></Label>
+                    <Label Grid.Row="1" VerticalAlignment="Bottom" Content="{Binding LatencyCam1}" FontFamily="Trebuchet MS" Foreground="#0066cc" FontSize="10" Margin="50,0,0,0"></Label>
+                    
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="0.8*"/>
+                                <ColumnDefinition Width="1.1*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Trebuchet MS" 
+                            FontWeight="Bold" FontSize="10" Foreground="#0066cc" Margin="0,0,0,0" Content="FPS&#10;Received:" Grid.Column="0"/>
+                            <TextBox x:Name="txtFps_received" Grid.Column="0" Text="{Binding FPS, Mode=OneWay}" Width="50" HorizontalAlignment="Center" Margin="40,15,-10,15"/>
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Trebuchet MS" 
+                            FontWeight="Bold" FontSize="10" Foreground="#0066cc" Margin="0,0,0,0" Content="FPS&#10;Real:" Grid.Column="1"/>
+                            <TextBox x:Name="txtFps_real" Grid.Column="1" Text="{Binding FPS_Real, Mode=OneWay}" Width="50" HorizontalAlignment="Center" Margin="30,15,0,15"/>
+                            <Button Grid.Column="2" Width="110"
+                            Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ButtonCaptureCamera}" Content="Capture Front Cam" RenderTransformOrigin="0.506,0.469"></Button>
+                            <Button Grid.Column="3" Width="98"
+                            Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ButtonStopCamera}" Content="Stop Front Cam"/>
+                        </Grid>
+                        
+                        
+                    </Grid>
+                    
+                    <Button Grid.Column="0" Grid.Row="2" Margin="0,75,125,0" Width="97"
+                Height="25" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding ButtonCaptureWheel}" Content="Capture Wheel"></Button>
+                    <Button Grid.Row="2" Margin="125,75,0,0" Width="98"
+                Height="26" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding ButtonCaptureRandom}" Content="Capture Random"/>
+                    <Button Grid.Column="0" Grid.Row="2" Margin="0,100,0,0" Width="98"
+                Height="24" HorizontalAlignment="Center" VerticalAlignment="Bottom" Command="{Binding ButtonStopCapture}" Content="Stop Wheel"></Button>
+                    
+                    
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="0.25*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="0.25*"/>
+                    </Grid.RowDefinitions>
+                    <Image Name="img4" Margin="30,0,30,0" Grid.Row="0" Source="{Binding Foto4}" />
+                    <Label Grid.Row="0" VerticalAlignment="Bottom" Content="Latency:" FontFamily="Trebuchet MS" Foreground="#0066cc" FontSize="10" Width="80" HorizontalAlignment="Left" Background="White"></Label>
+                    <Label Grid.Row="0" VerticalAlignment="Bottom" Content="{Binding LatencyCam4}" FontFamily="Trebuchet MS" Foreground="#0066cc" FontSize="10" Margin="50,0,0,0"></Label>
+                    <Image Name="img5" Margin="30,0,30,0" Grid.Row="2" Source="{Binding Foto5}" />
+                    <Label Grid.Row="2" VerticalAlignment="Bottom" Content="Latency:" FontFamily="Trebuchet MS" Foreground="#0066cc" FontSize="10" Width="80" HorizontalAlignment="Left" Background="White"></Label>
+                    <Label Grid.Row="2" VerticalAlignment="Bottom" Content="{Binding LatencyCam5}" FontFamily="Trebuchet MS" Foreground="#0066cc" FontSize="10" Margin="50,0,0,0"></Label>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition Width="1.1*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Trebuchet MS" Margin="0,0,50,0" 
+                    FontWeight="Bold" FontSize="9" Foreground="#0066cc" Content="FPS&#10;Received:" Grid.Row="2"/>
+                        <TextBox x:Name="txtFps4_received" Grid.Column="0" Text="{Binding FPS4, Mode=OneWay}" Width="50" HorizontalAlignment="Center" Margin="40,5,0,5"/>
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Trebuchet MS" 
+                            FontWeight="Bold" FontSize="10" Foreground="#0066cc" Margin="0,0,0,0" Content="FPS&#10;Real:" Grid.Column="1"/>
+                        <TextBox x:Name="txtFps4_real" Grid.Column="1" Text="{Binding FPS4_Real, Mode=OneWay}" Width="50" HorizontalAlignment="Center" Margin="30,5,0,5"/>
+                        <Button Grid.Column="2" Width="110"
+                    Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ButtonCaptureCam4}" Content="Capture Rear Cam"></Button>
+                        <Button Grid.Column="3" Width="98"
+                    Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ButtonStopCam4}" Content="Stop Rear Cam"></Button>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition Width="1.1*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Trebuchet MS" Margin="0,0,50,0" 
+                    FontWeight="Bold" FontSize="9" Foreground="#0066cc" Content="FPS&#10;Received:" Grid.Row="2"/>
+                        <TextBox x:Name="txtFps5_received" Grid.Column="0" Text="{Binding FPS5, Mode=OneWay}" Width="50" HorizontalAlignment="Center" Margin="40,5,0,5"/>
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Trebuchet MS" 
+                            FontWeight="Bold" FontSize="10" Foreground="#0066cc" Margin="0,0,0,0" Content="FPS&#10;Real:" Grid.Column="1"/>
+                        <TextBox x:Name="txtFps5_real" Grid.Column="1" Text="{Binding FPS5_Real, Mode=OneWay}" Width="50" HorizontalAlignment="Center" Margin="30,5,0,5"/>
+                        <Button Grid.Column="2" Width="110"
+                    Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ButtonCaptureCam5}" Content="Capture Face Cam"></Button>
+                        <Button Grid.Column="3" Width="98"
+                    Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ButtonStopCam5}" Content="Stop Face Cam"></Button>
+                    </Grid>
+                </Grid>
+                <Button Grid.Row="1" Grid.Column="1" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ChangeView}" Content="Change View" FontSize="20" IsEnabled="{Binding ChangeViewIsEnabled}"></Button>
+                <Button Grid.Column="2" Grid.Row="1" Width="110"
+                    Height="24" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding ButtonSaveFrames}" Content="Save Captured Frames"></Button>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.15*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Width="110" Height="24" HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding ButtonCaptureLatency}" Content="Capture Latency"></Button>
+                    <Button Grid.Column="2" Width="110" Height="24" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding ButtonStopLatency}" Content="Stop Latency"></Button>
+                </Grid>
+                
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0" Height="300" Panel.ZIndex="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="6*"></RowDefinition>
+                    <RowDefinition Height="37*"></RowDefinition>
+                    <RowDefinition Height="6*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Popup Name="LogErrorDscrpt" StaysOpen="False" Visibility="Visible" Placement="MousePoint" Panel.ZIndex="3">
+                    <Border BorderBrush="Red" BorderThickness="2" Background="White">
+                        <TextBlock Text="{Binding LogErrorDescriptor}" Padding="5" Width="300"
+                    TextWrapping="Wrap" FontWeight="Bold"></TextBlock>
+                    </Border>
+                </Popup>
+                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Trebuchet MS" 
+                    FontWeight="Bold" FontSize="13" Foreground="#0066cc" Content="Log List:" Margin="20,0,0,0" Grid.Row="0"/>
+                <TextBox Height="2" VerticalAlignment="Top" IsEnabled="False" BorderBrush="Gray" Background="Gray" ></TextBox>
+                <Border BorderBrush="Black" BorderThickness="1" VerticalAlignment="Center" CornerRadius="5" Width="350" HorizontalAlignment="Left" Margin="190,0,0,0">
+                    <StackPanel Margin="2" Orientation="Horizontal">
+                        <!--<Image Source="C:\SourceOfTheImage\Path\Image.png" Height="18"/>-->
+                        <Button Width="20" Content="{StaticResource SearchImg}" Command="{Binding ButtonSearchLogs}"></Button>
+                        <TextBox Text="{Binding LogsTextSearch, Mode=TwoWay}" Margin="3 0 0 0" Width="318"/>
+                    </StackPanel>
+                </Border>
+                <Button Width="98" Grid.Row="0"
+                Height="24" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding ButtonStopLogs}" Content="{Binding ButtonStartStopLogsText, Mode=OneWay}" Panel.ZIndex="2" Background="{Binding stopLogsStateBckg, Mode=OneWay}"/>
+                <Border Height="24" Width="98" Margin="0,0,147,0" Grid.Row="0" BorderBrush="Gray" Background="LightGray" BorderThickness="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Panel.ZIndex="2">
+                    <CheckBox Command="{Binding ButtonShowErrors}" VerticalAlignment="Center" IsChecked="{Binding LogsShowErrorsChecked, Mode=OneWay}" IsEnabled="{Binding LogsShowErrorsEnabled}">
+                        <TextBlock>
+				        Show Errors
+                        </TextBlock>
+                    </CheckBox>
+                </Border>
+                <Border Height="24" Width="98" Margin="0,0,245,0" Grid.Row="0" BorderBrush="Gray" Background="LightGray" BorderThickness="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Panel.ZIndex="2">
+                    <CheckBox Command="{Binding ButtonShowWarnings}" VerticalAlignment="Center" IsChecked="{Binding LogsShowWarningsChecked, Mode=OneWay}" IsEnabled="{Binding LogsShowWarningsEnabled}">
+                        <TextBlock>
+				        Show Warnings
+                        </TextBlock>
+                    </CheckBox>
+                </Border>
+                <Border Height="24" Width="98" Margin="0,0,343,0" Grid.Row="0" BorderBrush="Gray" Background="LightGray" BorderThickness="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Panel.ZIndex="2">
+                    <CheckBox Command="{Binding ButtonShowInfo}" VerticalAlignment="Center" IsChecked="{Binding LogsShowInfoChecked, Mode=OneWay}" IsEnabled="{Binding LogsShowInfoEnabled}">
+                        <TextBlock>
+				        Show Info
+                        </TextBlock>
+                    </CheckBox>
+                </Border>
+                <Border Height="24" Width="98" Margin="0,0,441,0" Grid.Row="0" BorderBrush="Gray" Background="LightGray" BorderThickness="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Panel.ZIndex="2">
+                    <CheckBox Command="{Binding ButtonShowDebug}" VerticalAlignment="Center" IsChecked="{Binding LogsShowDebugChecked, Mode=OneWay}" IsEnabled="{Binding LogsShowDebugEnabled}">
+                        <TextBlock>
+				        Show Debug
+                        </TextBlock>
+                    </CheckBox>
+                </Border>
+                <!--<DataGrid Name="LogInfo" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding DataLog, Mode=OneWay}" Panel.ZIndex="2"></DataGrid>-->
+                <loglib:SortableDataGrid x:Name="LogGrid"  Grid.Row="1" ItemsSource="{Binding DataLog.CurrentPageItems}" 
+                        AutoGenerateColumns="False" FullItemsSource="{Binding DataLog}"
+                        CanUserAddRows="false" Background="White" MouseDoubleClick="LogRowDoubleClick">
+                    <loglib:SortableDataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="Auto"/>
+                        <DataGridTextColumn Binding="{Binding Date, StringFormat=HH:mm:ss : ffff}" Header="Date" Width="Auto"/>
+                        <DataGridTextColumn Binding="{Binding Type}" Header="Type" Width="Auto"/>
+                        <DataGridTextColumn Binding="{Binding Description}" Header="Description" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding FromMethod}" Header="Method" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding FromClass}" Header="Class" Width="*"/>
+                    </loglib:SortableDataGrid.Columns>
+                </loglib:SortableDataGrid>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,5,0,10" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Button Content="Previous" ToolTip="Previous Page" Width="70" Command="{Binding GoToPreviousLogPageCommand}"/>
+                    <TextBlock Margin="35,0,35,0" FontWeight="Bold" FontSize="13" TextAlignment="Center" VerticalAlignment="Center">
+                <Run Text="{Binding DataLog.CurrentPageNumber, Mode=OneWay}" />
+                <Run Text=" of "/>
+                <Run Text="{Binding DataLog.TotalPagesNumber, Mode=OneWay}"/>
+                    </TextBlock>
+                    <Button Content="Next" ToolTip="Next Page" Width="70" Command="{Binding GoToNextLogPageCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1" Background="Gray"></Grid>
+        <Grid Grid.Column="2" Margin="5,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="7"/>
+                <RowDefinition/>
+                <RowDefinition Height="7"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="7"/>
+                <RowDefinition/>
+                <RowDefinition Height="7"/>
+                <RowDefinition/>
+                <RowDefinition Height="7"/>
+                <RowDefinition/>
+                <RowDefinition Height="7"/>
+                <RowDefinition Height="1.25*"/>
+                <RowDefinition Height="7"/>
+                <RowDefinition/>
+                
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="12*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--<WebBrowser Grid.Column="0" x:Name="wbMaps" Source=""/>-->
+                <m:Map Grid.Column="0" Grid.Row="0" x:Name="myMap" CredentialsProvider="4x0J9HJm1dx2Xd65vWCu~vQuTFu7k8_qifZpvQOhr4g~Apm5rTn-7nBWv19POVXumvSarVu_LIdrZGAa2GuQlNcl-6_pOamXDHmJfC3dpej3" Mode="Aerial" Center="41.505329, 1.886978" ZoomLevel="18">
+                    <m:Map.Resources>
+                        <Style TargetType="m:Pushpin" x:Key="LabelPushpinStyle">
+                            <Setter Property="OverridesDefaultStyle" Value="true" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="m:Pushpin">
+                                        <Canvas Background="Transparent">
+                                            <Border Canvas.Left="20" Canvas.Top="-7" Width="115" Height="30"
+                                            Opacity="1">
+                                                <Border.Effect>
+                                                    <DropShadowEffect Color="LightGray" />
+                                                </Border.Effect>
+                                                    <!--https://iskrystalll.blogspot.com/2019/03/custom-pushpin-in-bing-maps-control-for.html-->
+                                                <Label Content="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Background="Transparent" FontWeight="DemiBold" FontSize="13"></Label>
+                                                    <!--<TextBlock Margin="4 0" Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" FontSize="12" Foreground="Black" FontWeight="DemiBold" Background="Transparent"/>-->
+                                            </Border>
+
+                                            <!--<Path Data="M0,0 30,-12 30,-20 130,-20 130,12 30,12 30,-20" StrokeThickness="2" Stroke="DimGray" />-->
+                                            <Ellipse Width="16" Height="16" Fill="DarkOrange" Stroke="Black" StrokeThickness="1" Panel.ZIndex="2" />
+                                            <Ellipse Width="9" Height="9" Fill="White" Stroke="Black" StrokeThickness="1" Panel.ZIndex="4" Canvas.Top="3" Canvas.Left="3.5" />
+                                            <Polygon Points="0,5 13,5, 7,17" Stroke="Black" Fill="DarkOrange" Canvas.Top="4" Canvas.Left="1" Panel.ZIndex="1" />
+                                            <Polygon Points="0,5 13,5, 7,17" Stroke="DarkOrange" Fill="DarkOrange" Canvas.Top="2.5" Canvas.Left="1" Panel.ZIndex="3" />
+                                        </Canvas>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </m:Map.Resources>
+                    <m:Pushpin Location="41.505384, 1.886917" Style="{StaticResource LabelPushpinStyle}" Content="Altran Innovacion">
+                    </m:Pushpin>
+                </m:Map>
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Button Click="LoadRoute" Grid.Row="0" Margin="0,0,0,5" Content="Load&#10;Route"></Button>
+                    <Button Click="PlayRoute" Grid.Row="1" Margin="0,5" Content="Play&#10;Route"></Button>
+                    <Button Click="StopRoute" Grid.Row="2" Margin="0,5,0,0" Content="Stop&#10;Route"></Button>
+                </Grid>
+                <Label Grid.Row="2" VerticalAlignment="Bottom" Content="GPS:" FontFamily="Trebuchet MS" Foreground="#0066cc" FontSize="10" Width="30" HorizontalAlignment="Left" Margin="0"></Label>
+                <TextBox Grid.Row="2" Text="" Width="60" HorizontalAlignment="Center" Height="17" VerticalAlignment="Center" Margin="-150,0,0,0"/>
+                <TextBox Grid.Row="2" Text="" Width="60" HorizontalAlignment="Center" Height="17" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                <TextBox Grid.Row="2" Text="" Width="60" HorizontalAlignment="Center" Height="17" VerticalAlignment="Center" Margin="150,0,0,0"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3.9*"/>
+                </Grid.ColumnDefinitions>
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Trebuchet MS" Margin="0,0,0,0" 
+                    FontWeight="Bold" FontSize="10" Foreground="#0066cc" Content="Next&#10;Waypoint&#10;Information:" Grid.Row="2"/>
+                <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1"></Border>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="1" Content="Meters:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="12" VerticalAlignment="Top" Padding="0" Margin="0,10,0,0"></Label>
+                    <TextBox Grid.Column="1" Text="{Binding FPS4, Mode=OneWay}" Width="60" HorizontalAlignment="Center" Height="30" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                    <Label Grid.Column="3" Content="Angle:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="12" VerticalAlignment="Top" Padding="0" Margin="0,10,0,0"></Label>
+                    <TextBox Grid.Column="3" Text="{Binding FPS4, Mode=OneWay}" Width="60" HorizontalAlignment="Center" Height="30" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                    <Label Grid.Column="5" Content="ETA:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="12" VerticalAlignment="Top" Padding="0" Margin="0,10,0,0"></Label>
+                    <TextBox Grid.Column="5" Text="{Binding FPS4, Mode=OneWay}" Width="60" HorizontalAlignment="Center" Height="30" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3.9*"/>
+                </Grid.ColumnDefinitions>
+                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Trebuchet MS" Margin="0,0,0,0" 
+                    FontWeight="Bold" FontSize="13" Foreground="#0066cc" Content="User&#10;Control&#10;Input:" Grid.Row="2"/>
+                <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1"></Border>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="1" Content="Thrust:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="12" VerticalAlignment="Top" Padding="0" Margin="0,10,0,0"></Label>
+                        <TextBox Grid.Column="1" Text="{Binding FPS4, Mode=OneWay}" Width="60" HorizontalAlignment="Center" Height="30" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                        <Label Grid.Column="3" Content="Brake:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="12" VerticalAlignment="Top" Padding="0" Margin="0,10,0,0"></Label>
+                        <TextBox Grid.Column="3" Text="{Binding FPS4, Mode=OneWay}" Width="60" HorizontalAlignment="Center" Height="30" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                        <Label Grid.Column="5" Content="Angle:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="12" VerticalAlignment="Top" Padding="0" Margin="0,10,0,0"></Label>
+                        <TextBox Grid.Column="5" Text="{Binding FPS4, Mode=OneWay}" Width="60" HorizontalAlignment="Center" Height="30" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                    </Grid>
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Trebuchet MS" 
+                    FontWeight="Bold" FontSize="10" Foreground="#0066cc" Content="Steering &#10;Wheel Button:" Margin="0,0,140,0" Grid.Column="0" Grid.Row="1"/>
+                    <TextBox x:Name="txtButtonWheelPressed"  Margin="80,0,0,0" Grid.Column="0" Grid.Row="1" Text="{Binding txtButtonWheelPressed, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="142" Height="34"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3.9*"/>
+                </Grid.ColumnDefinitions>
+                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Trebuchet MS" Margin="0,0,0,0" 
+                    FontWeight="Bold" FontSize="10" Foreground="#0066cc" Content="Vehicle&#10;Realtime&#10;Status:" Grid.Row="2"/>
+                <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1"></Border>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="1" Content="Thrust:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="12" VerticalAlignment="Top" Padding="0" Margin="0,10,0,0"></Label>
+                    <TextBox Grid.Column="1" Text="{Binding FPS4, Mode=OneWay}" Width="60" HorizontalAlignment="Center" Height="30" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                    <Label Grid.Column="3" Content="Brake:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="12" VerticalAlignment="Top" Padding="0" Margin="0,10,0,0"></Label>
+                    <TextBox Grid.Column="3" Text="{Binding FPS4, Mode=OneWay}" Width="60" HorizontalAlignment="Center" Height="30" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                    <Label Grid.Column="5" Content="Angle:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="12" VerticalAlignment="Top" Padding="0" Margin="0,10,0,0"></Label>
+                    <TextBox Grid.Column="5" Text="{Binding FPS4, Mode=OneWay}" Width="60" HorizontalAlignment="Center" Height="30" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1" Content="Speed:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="12" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                <TextBox Grid.Column="1" Text="{Binding FPS4, Mode=OneWay}" Width="70" HorizontalAlignment="Center" Height="35" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
+                <Label Grid.Column="3" Content="Wifi Level:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="12" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                <TextBox Grid.Column="3" Text="{Binding FPS4, Mode=OneWay}" Width="70" HorizontalAlignment="Center" Height="35" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
+                <Border Grid.Column="5" BorderBrush="Gray" BorderThickness="1"></Border>
+                <Ellipse Grid.Column="5" Width="30" Height="30" Panel.ZIndex="3" Fill="DarkGreen" Margin="0,25,0,0" Stroke="Gray" StrokeThickness="1"></Ellipse>
+                <Label Grid.Column="5" Content="System&#10;Stable:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="22" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+            </Grid>
+            <Grid Grid.Row="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1" Content="        Latency&#10;Desktop -> Server:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="22" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                <TextBox Grid.Column="1" Text="{Binding LatencyCam1, Mode=OneWay}" Width="70" HorizontalAlignment="Center" Height="35" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
+                <Label Grid.Column="3" Content="     Latency&#10;Server -> Car:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="22" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                <TextBox Grid.Column="3" Text="{Binding FPS4, Mode=OneWay}" Width="70" HorizontalAlignment="Center" Height="35" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
+                <Label Grid.Column="5" Content="Battery&#10; Level:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="22" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                <TextBox Grid.Column="5" Text="{Binding FPS4, Mode=OneWay}" Width="70" HorizontalAlignment="Center" Height="35" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
+            </Grid>
+            <Grid Grid.Row="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <Label VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Trebuchet MS" Margin="0,0,0,0" 
+                    FontWeight="Bold" FontSize="13" Foreground="#0066cc" Content="Latency&#10;EDGE&#10;Side:" Grid.Row="2"/>
+                <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1"></Border>
+                <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
+                    <Grid Grid.Column="1" Width="440">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition  Width="4.25*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition  Width="4*"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition  Width="4*"/>
+                        <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                    <Label Grid.Column="1" Content="&#10;GPS:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="22" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                    <TextBox Grid.Column="1" Text="{Binding LatencyGPS, Mode=OneWay}" Width="35" HorizontalAlignment="Center" Height="25" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                    <Label Grid.Column="3" Content="Obstacles&#10;Message:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="24" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                    <TextBox Grid.Column="3" Text="{Binding ObstaclesMessagesCounter, Mode=OneWay}" Width="35" HorizontalAlignment="Center" Height="25" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                    <Label Grid.Column="5" Content="Status&#10;Message:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="25" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                    <TextBox Grid.Column="5" Text="{Binding StatusMessagesCounter, Mode=OneWay}" Width="35" HorizontalAlignment="Center" Height="25" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                    <Label Grid.Column="7" Content="Traffic&#10;Message:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="25" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                    <TextBox Grid.Column="7" Text="{Binding TrafficMessagesCounter, Mode=OneWay}" Width="35" HorizontalAlignment="Center" Height="25" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                    <Label Grid.Column="9" Content="WorldModel&#10;Message:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="25" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                    <TextBox Grid.Column="9" Text="{Binding WorldModelMessagesCounter, Mode=OneWay}" Width="35" HorizontalAlignment="Center" Height="25" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                    <Label Grid.Column="11" Content="Command&#10;Message:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="25" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                    <TextBox Grid.Column="11" Text="{Binding CommandMessagesCounter, Mode=OneWay}" Width="35" HorizontalAlignment="Center" Height="25" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                    <Label Grid.Column="13" Content="Lanes&#10;Message:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="25" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                    <TextBox Grid.Column="13" Text="{Binding LanesMessagesCounter, Mode=OneWay}" Width="35" HorizontalAlignment="Center" Height="25" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+            <Grid Grid.Row="14">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="1"></Border>
+                <Ellipse Grid.Column="0" Width="30" Height="30" Panel.ZIndex="3" Fill="Firebrick" Margin="0,25,0,0" Stroke="Gray" StrokeThickness="1"></Ellipse>
+                <Label Grid.Column="0" Content="Handbrake&#10;     Led:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="22" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1"></Border>
+                <Ellipse Grid.Column="1" Width="30" Height="30" Panel.ZIndex="3" Fill="Firebrick" Margin="0,25,0,0" Stroke="Gray" StrokeThickness="1"></Ellipse>
+                <Label Grid.Column="1" Content="Emergency&#10; Stop Led:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="22" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                <Border Grid.Column="2" BorderBrush="Gray" BorderThickness="1"></Border>
+                <Ellipse Grid.Column="2" Width="30" Height="30" Panel.ZIndex="3" Fill="{Binding reverseDrivingStateBckg, Mode=OneWay}" Margin="0,25,0,0" Stroke="Gray" StrokeThickness="1"></Ellipse>
+                <Label Grid.Column="2" Content="   Reverse&#10;Driving Led:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="22" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                <Border Grid.Column="3" BorderBrush="Gray" BorderThickness="1"></Border>
+                <Ellipse Grid.Column="3" Width="30" Height="30" Panel.ZIndex="3" Fill="Firebrick" Margin="0,25,0,0" Stroke="Gray" StrokeThickness="1"></Ellipse>
+                <Label Grid.Column="3" Content="High Voltage&#10;      Led:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="22" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+                <Border Grid.Column="4" BorderBrush="Gray" BorderThickness="1"></Border>
+                <Ellipse Grid.Column="4" Width="30" Height="30" Panel.ZIndex="3" Fill="Firebrick" Margin="0,25,0,0" Stroke="Gray" StrokeThickness="1"></Ellipse>
+                <Label Grid.Column="4" Content="Low Voltage&#10;      Led:" FontFamily="Trebuchet MS" FontSize="10" Foreground="#0066cc" HorizontalAlignment="Center" Height="22" VerticalAlignment="Top" Padding="0" Margin="0,3,0,0"></Label>
+            </Grid>
+        </Grid>
+    </Grid>
+    <Page.InputBindings>
+        <KeyBinding Command="{Binding ChangeView}" Key="V"/>
+    </Page.InputBindings>
+</Page>
